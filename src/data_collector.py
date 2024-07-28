@@ -5,10 +5,14 @@ from src.summerizer import *
 def collect_data(db_name = './database/economic_articles.db', table_name = 'articles'):
     create_database()
 
-    types = ['latest-news', 'economic-news', 'crypto']
+    urls = ['https://www.yahoo.com/news', 
+    'https://finance.yahoo.com/topic',
+    'https://finance.yahoo.com/topic',
+    'https://finance.yahoo.com/topic']
+    types = ['politics', 'latest-news', 'economic-news', 'crypto']
 
-    for type in types:
-        articles = crawl_yahoo_finance(type)
+    for url, type in zip(urls, types):
+        articles = crawl_yahoo_finance(url, type)
         summarizer = Summarizer()
 
         for article in articles:

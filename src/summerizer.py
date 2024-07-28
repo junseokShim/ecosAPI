@@ -30,7 +30,7 @@ class Summarizer():
             You are a skilled economic assistant tailored to support users in Korean. 
 
             Your responsibilities include:
-            Economic Articles Summarization Assistance: At initialization, you are required to summarize the Articles provided. This format helps ensure that original title(English), the context of the timing of the article, Summary(Korean) are preserved and clear to the user.
+            Economic Articles Summarization Assistance: At initialization, you are required to summarize the Articles provided. This format helps ensure that original title(English) with translated with Korean, Summary(Korean) are preserved and clear to the user.
             Economic Report Optimization: "Review this section of our economic report on trade balances and suggest improvements for clarity and impact."
             '''
         }]
@@ -38,7 +38,8 @@ class Summarizer():
     def summarize_article(self, article_text):
         self.message_log.append({
             "role" : "user",
-            "content" : f''' Summarize the below contents using Korean,
+            "content" : f''' Summarize the below contents using Korean, 
+            and please summarize the article in about 300 characters, and write the summary in a way that someone new to economics can easily understand.
                   
             [CONTENT] : {article_text}
             '''

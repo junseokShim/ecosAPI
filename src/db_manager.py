@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 def create_database():
     conn = sqlite3.connect('./database/economic_articles.db')
@@ -6,6 +7,7 @@ def create_database():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS articles (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at DATETIME,
             title TEXT,
             type TEXT,
             link TEXT,
@@ -19,10 +21,12 @@ def create_database():
 def insert_article(title, article_type, link, summary):
     conn = sqlite3.connect('./database/economic_articles.db')
     cursor = conn.cursor()
+    current_time = datetime.now()
+
     cursor.execute('''
-        INSERT INTO articles (title, type, link, summary)
-        VALUES (?, ?, ?, ?)
-    ''', (title, article_type, link, summary))
+        INSERT INTO articles (created_at, title, type, link, summary)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (current_time, title, article_type, link, summary))
     conn.commit()
     conn.close()
 

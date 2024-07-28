@@ -5,6 +5,8 @@ from typing import List
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 
+from apscheduler.schedulers.background import BackgroundScheduler
+
 import uvicorn
 
 app = FastAPI()
@@ -37,10 +39,23 @@ async def get_news():
     return JSONResponse(content=[item.dict() for item in summarized_news], headers={"Content-Type": "application/json; charset=utf-8"})
 
 
+
 def main():
+    # first
     collect_data()
+
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(collect_data, 'interval', seconds=600)  # 10초마다 collect_data 함수 실행
+    scheduler.start()
+    # 스케줄러가 실행 중에 예외가 발생하지 않도록 try-except 블록을 사용하세요.
+    try:
+        uvicorn.run(app, host="0.0.0.0", port=8000)
+    except (KeyboardInterrupt, SystemExit):
+        pass
+    finally:
+        # 서버가 종료되면 스케줄러도 종료합니다.
+        scheduler.shutdown()
 
 
 if __name__ == "__main__":
     main()
-    uvicorn.run(app, host="0.0.0.0", port=8000)

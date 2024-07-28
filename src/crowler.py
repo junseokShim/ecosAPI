@@ -1,12 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 
-def crawl_yahoo_finance(type):
+def crawl_yahoo_finance(url, type):
     '''
     yahoo finance로부터 경제뉴스 목록을 크롤링해오는 코드
     '''
-    url = f'https://finance.yahoo.com/topic/{type}/'
-    response = requests.get(url)
+    address = f'{url}/{type}/'
+    print(address)
+    response = requests.get(address)
     soup = BeautifulSoup(response.content, 'html.parser')
     articles = soup.find_all('li', class_='js-stream-content')
     #articles = soup.find_all('h3', class_='Mb(5px)')
