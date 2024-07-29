@@ -30,10 +30,11 @@ async def get_news():
         print(row_data[1])
         summarized_news.append(
             NewsItem(
-                title= row_data[1],
-                summary= row_data[4],
-                url= row_data[3],
-                type= row_data[2])
+                date = row_data[1],
+                title= row_data[2],
+                summary= row_data[5],
+                url= row_data[4],
+                type= row_data[3])
         )
 
     return JSONResponse(content=[item.dict() for item in summarized_news], headers={"Content-Type": "application/json; charset=utf-8"})
@@ -42,10 +43,12 @@ async def get_news():
 
 def main():
     # first
-    collect_data()
+    #collect_data()
+    update_articles_sorted_by_date_desc()
 
     scheduler = BackgroundScheduler()
-    scheduler.add_job(collect_data, 'interval', seconds=600)  # 10초마다 collect_data 함수 실행
+    scheduler.add_job(collect_data, 'interval', seconds=36000)  # 10시간마다 collect_data 함수 실행
+    #scheduler.add_job(collect_data, 'cron', hour=7, minute=0) # 매일 오전 5시 20분 실행
     scheduler.start()
     # 스케줄러가 실행 중에 예외가 발생하지 않도록 try-except 블록을 사용하세요.
     try:

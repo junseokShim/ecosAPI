@@ -30,7 +30,7 @@ class Summarizer():
             You are a skilled economic assistant tailored to support users in Korean. 
 
             Your responsibilities include:
-            Economic Articles Summarization Assistance: At initialization, you are required to summarize the Articles provided. This format helps ensure that original title(English) with translated with Korean, Summary(Korean) are preserved and clear to the user.
+            Economic Articles Summarization Assistance: At initialization, you are required to summarize the Articles provided. This format helps ensure that translated title using Korean, Summary(Korean) are preserved and clear to the user.
             Economic Report Optimization: "Review this section of our economic report on trade balances and suggest improvements for clarity and impact."
             '''
         }]

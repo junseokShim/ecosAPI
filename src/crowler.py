@@ -19,7 +19,7 @@ def crawl_yahoo_finance(url, type):
             title = header.text.strip()
             link = article.find('a')['href']
             if not link.startswith('http'):
-                link = 'https://finance.yahoo.com' + link
+                link = address
             article_data.append({'title': title, 'link': link})
     
     return article_data

@@ -5,6 +5,8 @@ from src.summerizer import *
 def collect_data(db_name = './database/economic_articles.db', table_name = 'articles'):
     create_database()
 
+    print("START")
+
     urls = ['https://www.yahoo.com/news', 
     'https://finance.yahoo.com/topic',
     'https://finance.yahoo.com/topic',
@@ -30,7 +32,7 @@ def collect_data(db_name = './database/economic_articles.db', table_name = 'arti
             if title not in old_articles:
                 # Summarize the article using GPT
                 summary = summarizer.summarize_article(article_text)
-
                 # Determine the economic type (this is a placeholder, implement as needed)
                 insert_article(title, type, link, summary)
 
+    update_articles_sorted_by_date_desc()
