@@ -36,3 +36,14 @@ def collect_data(db_name = './database/economic_articles.db', table_name = 'arti
                 insert_article(title, type, link, summary)
 
     update_articles_sorted_by_date_desc()
+
+
+def report_economic_news():
+    create_report_db()
+
+    summarizer = Summarizer()
+    insert_report_db(summarizer)
+
+    update_report_sorted_by_date_desc()
+    
+

@@ -48,4 +48,19 @@ class Summarizer():
         self.chatbot = Worker(self.message_log)
         summarized_content = self.chatbot.run()
         return summarized_content
+    
+    def get_daily_report(self, contents):
+        
+        self.message_log.append({
+            "role" : "user",
+            "content" : f''' Report the daily ecomonic event with below [CONTENT].
+            Please summarize the economic news article, focusing only on the most important and relevant information. The summary should be around 500 characters and must cover the key points such as significant events, figures, and implications. Exclude any extraneous details, opinions, or lengthy explanations. Ensure the summary is clear, accurate, and provides a quick yet comprehensive understanding of the article's main points.
+                  
+            [CONTENT] : {contents}
+            '''
+        })
+
+        self.chatbot = Worker(self.message_log)
+        summarized_content = self.chatbot.run()
+        return summarized_content
 
