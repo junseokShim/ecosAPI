@@ -16,8 +16,10 @@ def collect_data(db_name = './database/economic_articles.db', table_name = 'arti
     for url, type in zip(urls, types):
         articles = crawl_yahoo_finance(url, type)
         summarizer = Summarizer()
+        num = 0
 
         for article in articles:
+            if num > 3: break # 돈이 너무 나옴 ㅠㅠ
             title = article['title']
             link = article['link']
 
@@ -34,6 +36,7 @@ def collect_data(db_name = './database/economic_articles.db', table_name = 'arti
                 summary = summarizer.summarize_article(article_text)
                 # Determine the economic type (this is a placeholder, implement as needed)
                 insert_article(title, type, link, summary)
+                
 
     update_articles_sorted_by_date_desc()
 

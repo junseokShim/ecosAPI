@@ -67,7 +67,7 @@ async def get_daily_reports():
 def main():
     # first
     collect_data()
-    report_economic_news()
+    #report_economic_news()
     
 
     scheduler = BackgroundScheduler()
